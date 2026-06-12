@@ -2,9 +2,11 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 	<Target Name="ILRepacker" AfterTargets="Build">
 		<ItemGroup>
+			<!-- Only merge Newtonsoft.Json. Do NOT merge FluentValidation
+			     because its types (ValidationFailure) appear in public method
+			     signatures inherited from Lidarr base classes. -->
 			<InputAssemblies Include="$(OutputPath)Lidarr.Plugin.AppleMusic.dll" />
 			<InputAssemblies Include="$(OutputPath)Newtonsoft.Json.dll" />
-			<InputAssemblies Include="$(OutputPath)FluentValidation.dll" />
 		</ItemGroup>
 
 		<ILRepack
@@ -17,11 +19,7 @@
             OutputFile="$(OutputPath)$(AssemblyName).dll"
         />
 
-		<!-- Remove the loose dependency DLLs that were merged into the main assembly -->
 		<Delete Files="$(OutputPath)Newtonsoft.Json.dll" />
-		<Delete Files="$(OutputPath)FluentValidation.dll" />
-
-		<!-- Remove runtimes directory (native deps from Lidarr transitive references) -->
 		<RemoveDir Directories="$(OutputPath)runtimes" />
 	</Target>
 </Project>
