@@ -31,7 +31,7 @@ jobs:
         run: dotnet restore src/${{ env.PLUGIN_NAME }}/${{ env.PLUGIN_NAME }}.csproj /p:TreatWarningsAsErrors=false /p:NuGetAudit=false
 
       - name: Build
-        run: dotnet build src/${{ env.PLUGIN_NAME }}/${{ env.PLUGIN_NAME }}.csproj --configuration Release --no-restore /p:TreatWarningsAsErrors=false /p:NuGetAudit=false
+        run: dotnet build src/${{ env.PLUGIN_NAME }}/${{ env.PLUGIN_NAME }}.csproj --configuration Release --no-restore /p:TreatWarningsAsErrors=false /p:NuGetAudit=false /p:AssemblyVersion=1.0.0.0 /p:Deterministic=true
 
       - name: Package
         run: |
