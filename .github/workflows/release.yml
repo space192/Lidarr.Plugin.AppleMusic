@@ -36,11 +36,12 @@ jobs:
       - name: Package
         run: |
           cd _plugins/${{ env.PLUGIN_NAME }}
-          zip -r ../../${{ env.PLUGIN_NAME }}-${{ github.ref_name }}.zip ${{ env.PLUGIN_NAME }}.dll ${{ env.PLUGIN_NAME }}.pdb
+          # Only include the plugin DLL — Lidarr.Core/Common are provided by the host
+          zip ../../${{ env.PLUGIN_NAME }}-${{ github.ref_name }}.net8.0.zip ${{ env.PLUGIN_NAME }}.dll
 
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
           name: "${{ env.PLUGIN_NAME }} ${{ github.ref_name }}"
-          files: ${{ env.PLUGIN_NAME }}-${{ github.ref_name }}.zip
+          files: ${{ env.PLUGIN_NAME }}-${{ github.ref_name }}.net8.0.zip
           generate_release_notes: true
