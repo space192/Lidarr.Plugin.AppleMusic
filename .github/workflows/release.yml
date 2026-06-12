@@ -37,8 +37,6 @@ jobs:
         run: |
           mkdir -p staging
           cp _plugins/${{ env.PLUGIN_NAME }}/${{ env.PLUGIN_NAME }}.dll staging/
-          cp _plugins/${{ env.PLUGIN_NAME }}/Lidarr.Core.dll staging/
-          cp _plugins/${{ env.PLUGIN_NAME }}/Lidarr.Common.dll staging/
           cd staging
           zip ../${{ env.PLUGIN_NAME }}-${{ github.ref_name }}.net8.0.zip *.dll
 
