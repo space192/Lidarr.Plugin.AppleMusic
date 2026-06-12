@@ -13,6 +13,15 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+		<PackageReference Include="FluentValidation" Version="9.5.4" />
+		<PackageReference Include="ILRepack.Lib.MSBuild.Task" Version="2.0.44.2">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
+
+	<ItemGroup>
 		<ProjectReference Include="..\..\Submodules\Lidarr\src\NzbDrone.Common\Lidarr.Common.csproj">
 			<Private>false</Private>
 			<ExcludeAssets>runtime</ExcludeAssets>

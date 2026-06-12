@@ -1,6 +1,27 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-	<!-- ILRepack disabled: no third-party deps to merge.
-	     Lidarr host assemblies (Lidarr.Core, Lidarr.Common) are excluded
-	     from the output so the plugin falls back to the host's copies at runtime. -->
+	<Target Name="ILRepacker" AfterTargets="Build">
+		<ItemGroup>
+			<InputAssemblies Include="$(OutputPath)Lidarr.Plugin.AppleMusic.dll" />
+			<InputAssemblies Include="$(OutputPath)Newtonsoft.Json.dll" />
+			<InputAssemblies Include="$(OutputPath)FluentValidation.dll" />
+		</ItemGroup>
+
+		<ILRepack
+            Parallel="true"
+            Internalize="true"
+            InputAssemblies="@(InputAssemblies)"
+            TargetKind="Dll"
+            DebugInfo="true"
+            LibraryPath="..\..\Submodules\Lidarr\_output\net8.0\;$(OutputPath)"
+            OutputFile="$(OutputPath)$(AssemblyName).dll"
+        />
+
+		<!-- Remove the loose dependency DLLs that were merged into the main assembly -->
+		<Delete Files="$(OutputPath)Newtonsoft.Json.dll" />
+		<Delete Files="$(OutputPath)FluentValidation.dll" />
+
+		<!-- Remove runtimes directory (native deps from Lidarr transitive references) -->
+		<RemoveDir Directories="$(OutputPath)runtimes" />
+	</Target>
 </Project>
