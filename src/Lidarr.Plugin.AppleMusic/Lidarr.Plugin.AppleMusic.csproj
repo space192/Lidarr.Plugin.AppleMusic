@@ -12,15 +12,9 @@
 		<AdditionalFiles Remove="..\..\stylecop.json" />
 	</ItemGroup>
 
-<ItemGroup>
-		<ProjectReference Include="..\..\Submodules\Lidarr\src\NzbDrone.Common\Lidarr.Common.csproj">
-			<Private>false</Private>
-			<ExcludeAssets>runtime</ExcludeAssets>
-		</ProjectReference>
-		<ProjectReference Include="..\..\Submodules\Lidarr\src\NzbDrone.Core\Lidarr.Core.csproj">
-			<Private>false</Private>
-			<ExcludeAssets>runtime</ExcludeAssets>
-		</ProjectReference>
+	<ItemGroup>
+		<ProjectReference Include="..\..\Submodules\Lidarr\src\NzbDrone.Common\Lidarr.Common.csproj" />
+		<ProjectReference Include="..\..\Submodules\Lidarr\src\NzbDrone.Core\Lidarr.Core.csproj" />
 	</ItemGroup>
 
 	<PropertyGroup>
